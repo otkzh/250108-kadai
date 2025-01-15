@@ -35,9 +35,18 @@
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
 
-        // マーカーを地図上に追加
-        var marker = L.marker([35.6895, 139.6917]).addTo(map);
-        marker.bindPopup("Hello from Tokyo!").openPopup(); // ポップアップメッセージを設定
+        // markerdataを配列で定義する 
+        var markerdata = [
+            {name: "Tokyo", lat: 35.6895, lng: 139.6917},
+            {name: "Saitama", lat: 35.8573146, lng: 139.6437671},
+            {name: "Kanagawa", lat: 35.4474958, lng: 139.6424}
+        ];
+
+        // markerdataを使ってマーカーとポップアップを追加する
+        for (var i = 0; i < markerdata.length; i++) {
+            var marker = L.marker([markerdata[i].lat, markerdata[i].lng]).addTo(map);
+            marker.bindPopup("Hello from " + markerdata[i].name + "!").openPopup();
+        }
 
         // ポリゴンを地図上に追加
         var polygon = L.polygon([
